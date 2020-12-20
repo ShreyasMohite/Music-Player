@@ -4,6 +4,7 @@ import multiprocessing
 from playsound import playsound
 
 
+
 class Music:
     def __init__(self,root):
         self.root=root
@@ -11,6 +12,9 @@ class Music:
         self.root.iconbitmap("logo275.ico")
         self.root.geometry("400x250")
         self.root.resizable(0,0)
+
+
+        p,file_path=None
 
 
 
@@ -51,20 +55,20 @@ class Music:
 
 
         def browse():
-            global music
             file_path= filedialog.askopenfilename(title = "Select file",filetypes = (("mp3","*.mp3"),("all files","*.*")))
             lab_music.config(text=file_path)
-            music=file_path
+            
 
 
         def play():
-
-            global p
-            p = multiprocessing.Process(target=playsound, args=("{}".format(music),))
+            
+            p = multiprocessing.Process(target=playsound, args=("{}".format(file_path),))
             p.start()
             
 
         def stop():
+            
+           
             p.terminate()
            
 
